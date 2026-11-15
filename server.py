@@ -6,7 +6,7 @@ from pathlib import Path
 
 app=FastAPI()
 rooms={}
-SIZES=[1,1,3,4]
+SIZES=[4,4,3,2]
 def fail(msg): raise HTTPException(400,msg)
 def room(code):
     r=rooms.get(code)
@@ -61,7 +61,7 @@ def state(a:Secret):
     fired=set(r["shots"][i]);oppshots=set(r["shots"][1-i])
     own=occupied(me["ships"]) if me["ships"] else {}
     targets=occupied(opp["ships"]) if opp and opp["ships"] else {}
-    return {"code":a.code.upper(),"you":i,"phase":r["phase"],"turn":r["turn"],"winner":r["winner"],"players":[{"name":p["name"],"ready":p["ready"]} if p else None for p in r["players"]],"ships":me["ships"],"yourHits":[c for c in oppshots if c in own],"yourMisses":[c for c in oppshots if c not in own],"hits":[c for c in fired if c in targets],"misses":[c for c in fired if c not in targets],"shotCount":len(fired),"enemyRemaining":9-len([c for c in fired if c in targets])}
+    return {"code":a.code.upper(),"you":i,"phase":r["phase"],"turn":r["turn"],"winner":r["winner"],"players":[{"name":p["name"],"ready":p["ready"]} if p else None for p in r["players"]],"ships":me["ships"],"yourHits":[c for c in oppshots if c in own],"yourMisses":[c for c in oppshots if c not in own],"hits":[c for c in fired if c in targets],"misses":[c for c in fired if c not in targets],"shotCount":len(fired),"enemyRemaining":sum(SIZES)-len([c for c in fired if c in targets])}
 @app.post("/api/place")
 def place(a:Place):
     r=room(a.code.upper());i=player(r,a.token)
@@ -83,7 +83,7 @@ def fire(a:Fire):
     if a.cell in r["shots"][i]:fail("Ô này đã bắn")
     r["shots"][i].append(a.cell)
     hit=a.cell in occupied(r["players"][1-i]["ships"])
-    if hit and len([c for c in r["shots"][i] if c in occupied(r["players"][1-i]["ships"])])==9:
+    if hit and len([c for c in r["shots"][i] if c in occupied(r["players"][1-i]["ships"])])==sum(SIZES):
         r["winner"]=i;r["phase"]="ended"
     elif not hit:r["turn"]=1-i
     r["updated"]=time.time()
