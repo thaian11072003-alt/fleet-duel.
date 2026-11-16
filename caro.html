@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff3f9"><title>Caro Club 💗 • Caro 2 người online</title>
+<style>
+:root{--ink:#364365;--muted:#8992ae;--pink:#ee78ac;--pinklight:#ffe7f2;--sky:#5bbfdf;--skylight:#e4f7ff;--line:#e6e3f3;--shadow:0 18px 58px #7485b329}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:ui-rounded,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+body{background:radial-gradient(circle at 5% 8%,#ffdfed 0,transparent 26%),radial-gradient(circle at 96% 40%,#c6efff 0,transparent 34%),linear-gradient(115deg,#fff9fd,#f3faff 58%,#fcf5ff);background-attachment:fixed}
+.wrap{max-width:1100px;margin:auto;padding:20px 14px 42px}
+header{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:3px 2px 24px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{display:grid;place-items:center;background:linear-gradient(135deg,#ff9bc8,#85d7f4);width:51px;height:51px;border-radius:17px;box-shadow:0 8px 24px #f68bb456;font-size:29px;transform:rotate(-5deg)}
+.logo-title{font-size:27px;font-weight:950;letter-spacing:-1.3px;line-height:1}
+.logo-title span{color:var(--pink)}
+.logo-sub{font-size:10px;letter-spacing:2px;font-weight:900;color:#a5a1b6;margin-top:5px}
+.tag{border:1px solid #fff;background:#fffc;box-shadow:0 6px 18px #a5abcb20;border-radius:60px;padding:9px 13px;font-size:12px;color:#c27ba0;font-weight:900}
+.card{background:#fffffff2;border:1px solid white;border-radius:25px;padding:24px;box-shadow:var(--shadow)}
+.hidden{display:none!important}
+.welcome{max-width:585px;margin:30px auto}
+.hero{font-size:43px;margin-bottom:10px;letter-spacing:10px}
+h1{font-weight:950;letter-spacing:-1.8px;font-size:clamp(31px,7vw,48px);line-height:1.12;margin:0 0 10px}
+h1 span{color:var(--pink)}
+h2{font-size:23px;margin:0 0 12px;letter-spacing:-.7px}
+p{line-height:1.6;color:#7e89a4;margin:0 0 18px}
+.features{display:flex;flex-wrap:wrap;gap:7px;margin:21px 0 25px}
+.feature{font-size:12px;border-radius:50px;padding:7px 11px;font-weight:850;background:#fff0f7;color:#ce76a5}
+.feature:nth-child(2){background:#ebfaff;color:#4b9db8}
+.feature:nth-child(3){background:#fff8e4;color:#a78c4d}
+label{font-weight:900;font-size:13px}
+input{font:650 16px system-ui,-apple-system,sans-serif;color:var(--ink);padding:14px;border-radius:14px;border:2px solid #e6e9f5;background:#fcfcff;width:100%;margin:7px 0 16px;outline:0}
+input:focus{border-color:#78ceea;box-shadow:0 0 0 3px #c6f0ff}
+.btn{font:900 14px system-ui,-apple-system,sans-serif;cursor:pointer;border:0;min-height:45px;border-radius:13px;padding:11px 16px;color:#fff;background:linear-gradient(120deg,#f475a7,#ffa3c6);box-shadow:0 8px 17px #ef83ad50}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.52;cursor:not-allowed}
+.btn.blue{background:linear-gradient(120deg,#77d8f1,#56badd);box-shadow:0 8px 17px #7cceea50}
+.btn.ghost{background:#f2f5fa;color:#627393;box-shadow:none}
+.btn.small{min-height:38px;padding:9px 12px;border-radius:11px;font-size:13px}
+.btn.full{width:100%}
+.row{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.join-panel{margin-top:20px;border:1px solid #e1eef7;background:#f7fbff;border-radius:17px;padding:18px}
+.game{display:grid;grid-template-columns:minmax(0,1fr) minmax(305px,340px);gap:18px;align-items:start}
+.board-card{padding:15px}
+.game-head{display:flex;align-items:center;justify-content:space-between;padding:5px 5px 14px}
+.mini-heading{font-size:12px;font-weight:900;letter-spacing:1.1px;color:#97a3bb}
+.round-label{border-radius:40px;padding:7px 11px;background:#f3eeff;color:#9776c2;font-size:12px;font-weight:900}
+.scorebar{display:grid;grid-template-columns:1fr 44px 1fr;gap:8px;margin-bottom:13px}
+.score-tile{border-radius:16px;padding:10px 8px;background:#fff1f7;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.score-tile.o{background:#e9faff}
+.score-symbol{font-size:27px;font-weight:950;line-height:1}
+.score-symbol.x{color:var(--pink)}
+.score-symbol.o{color:var(--sky)}
+.score-wins{font-size:11px;color:#ad8aa4;font-weight:800}
+.score-tile.o .score-wins{color:#7e9eaf}
+.wins-count{font-size:23px;font-weight:950;line-height:1.1;font-variant-numeric:tabular-nums}
+.vs{display:grid;place-items:center;color:#acadc6;font-size:13px;font-weight:950}
+.board-frame{padding:7px;border-radius:16px;background:linear-gradient(135deg,#f8cfe2,#cdf0ff);box-shadow:0 9px 25px #aab7dd4a}
+.board{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));aspect-ratio:1;gap:1.3px;background:#bad5e4;touch-action:manipulation;border-radius:11px;padding:4px;overflow:hidden}
+.cell{appearance:none;-webkit-appearance:none;display:grid;place-items:center;width:100%;height:100%;border:0;outline:0;background:#fffdfc;padding:0;cursor:pointer;min-width:0;font-size:clamp(10px,3.4vw,25px);line-height:1;font-weight:950;border-radius:2.5px;user-select:none;-webkit-tap-highlight-color:transparent;position:relative}
+.cell:nth-child(even){background:#fff9fc}
+.cell.x{color:#ed7eaf;background:#fff1f7}
+.cell.o{color:#54b9db;background:#eafaff}
+.cell.last{box-shadow:inset 0 0 0 2px #f7cb75}
+.cell.win{background:#fcf0b6!important;box-shadow:inset 0 0 0 1.5px #e9bc62}
+.cell:focus-visible{outline:2px solid #c486e0;outline-offset:-2px}
+.cell:disabled{cursor:default}
+.cell:not(.x):not(.o):hover:enabled{background:#f9e6f3}
+.board-caption{text-align:center;margin:13px 0 2px;color:#8b9db6;font-size:12px;font-weight:750}
+.side{display:grid;gap:17px}
+.room-code{font-size:34px;letter-spacing:4px;color:#ed7eaa;font-weight:950;margin:5px 0 9px;font-variant-numeric:tabular-nums}
+.connection{padding:10px 12px;border-radius:12px;background:#edfaf3;color:#419d7a;font-size:12px;font-weight:850;margin:15px 0 12px}
+.connection.warn{background:#fff3e6;color:#bd8550}
+.players{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.player{border:1px solid #e4eaf3;border-radius:13px;background:#f9fbff;padding:11px;min-width:0}
+.player.mine{background:#fff3f8;border-color:#ffe2ef}
+.player .who{font-size:10px;letter-spacing:.7px;color:#8ba0b4;font-weight:900}
+.player .name{font-size:13px;font-weight:900;word-break:break-word}
+.player .note{font-size:11px;color:#8590aa;margin-top:4px}
+.status-box{background:linear-gradient(120deg,#fff0f7,#edfaff);border-radius:17px;padding:17px;margin:10px 0 15px;min-height:106px}
+.status-box strong{display:block;color:#c976a1;font-size:18px;margin-bottom:5px}
+.status-box div{color:#7285a4;font-size:13px;line-height:1.55}
+.rules{border-top:1px dashed #e3e7f3;margin-top:19px;padding-top:17px;color:#8291ac;font-size:13px;line-height:1.8}
+.rules b{color:#5e7595}
+.toast{position:fixed;z-index:20;left:50%;bottom:max(22px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(92vw,430px);background:#38445e;color:#fff;padding:13px 18px;text-align:center;border-radius:13px;box-shadow:0 10px 25px #48547470;font-size:13px;font-weight:850}
+footer{text-align:center;color:#9aa2b8;font-size:12px;margin-top:29px}
+@media(max-width:780px){.game{display:flex;flex-direction:column;align-items:stretch}.side{display:grid;grid-template-columns:1fr}.board-card{order:0;max-width:580px;width:100%;margin:auto}.side{order:1}.welcome{margin:10px auto}.card{padding:19px}.board-card{padding:12px}.wrap{width:min(100%,625px);padding:11px 9px 24px}header{margin-bottom:14px}.cell{font-size:clamp(11px,4vw,19px)}.board{padding:3px;gap:1px}.scorebar{margin-bottom:10px}}
+@media(max-width:370px){.logo-title{font-size:22px}.tag{font-size:10px}.logo-mark{width:43px;height:43px}.score-tile{padding:7px}.card{padding:13px}.board-card{padding:8px}.board{gap:.75px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><div class="logo"><div class="logo-mark">🌸</div><div><div class="logo-title">CARO <span>CLUB</span></div><div class="logo-sub">XO • TWO PLAYERS • ONLINE</div></div></div><div class="tag">💗 2 người</div></header>
+<section id="welcome" class="card welcome">
+<div class="hero">⭕ ❌ ✨</div><h1>Caro đôi — <span>đấu trí cực vui!</span></h1>
+<p>Rủ người yêu hoặc bạn bè đấu Caro trên hai điện thoại. Chơi theo lượt, nối đủ <b>5 quân liên tiếp</b> theo hàng ngang, dọc hoặc chéo để chiến thắng!</p>
+<div class="features"><span class="feature">💕 Hồng & xanh pastel</span><span class="feature">🎯 Bàn 15 × 15</span><span class="feature">⚡ 2 người online</span></div>
+<label for="nameInput">Tên của bạn</label>
+<input id="nameInput" maxlength="24" placeholder="Ví dụ: Bé Thỏ 🐰" autocomplete="nickname">
+<div class="row"><button class="btn" id="createBtn">💗 Tạo phòng mới</button><button class="btn blue" id="joinToggle">Vào phòng bạn bè</button></div>
+<div class="join-panel hidden" id="joinPanel"><label for="roomInput">Nhập mã phòng 6 ký tự</label><input id="roomInput" maxlength="6" placeholder="ABC123" autocomplete="off" spellcheck="false" style="text-transform:uppercase"><button class="btn blue full" id="joinBtn">🎮 Tham gia trận đấu</button></div>
+</section>
+<section class="game hidden" id="game">
+<div class="card board-card">
+<div class="game-head"><div class="mini-heading">🌷 BÀN CỜ CARO</div><div class="round-label" id="roundLabel">Vòng 1</div></div>
+<div class="scorebar">
+<div class="score-tile"><div><div class="score-symbol x">X</div><div class="score-wins">THẮNG</div></div><div class="wins-count" id="scoreX">0</div></div>
+<div class="vs">VS</div>
+<div class="score-tile o"><div><div class="score-symbol o">O</div><div class="score-wins">THẮNG</div></div><div class="wins-count" id="scoreO">0</div></div>
+</div>
+<div class="board-frame"><div class="board" id="board" aria-label="Bàn Caro 15x15"></div></div>
+<div class="board-caption" id="boardCaption">👆 Chạm một ô trống để đặt quân khi đến lượt</div>
+</div>
+<div class="side">
+<div class="card"><div class="mini-heading">MÃ PHÒNG</div><div class="room-code" id="roomCode">------</div>
+<div class="row"><button class="btn small" id="shareBtn">💌 Gửi link mời</button><button class="btn ghost small" id="leaveBtn">Thoát phòng</button></div>
+<div class="connection warn" id="connection">🟡 Đang kết nối...</div>
+<div class="players">
+<div class="player mine"><div class="who">💗 BẠN</div><div class="name" id="myName">...</div><div class="note" id="myInfo">Đang kết nối</div></div>
+<div class="player"><div class="who">💙 ĐỐI THỦ</div><div class="name" id="otherName">Chưa có ai</div><div class="note" id="otherInfo">Chờ tham gia</div></div>
+</div>
+</div>
+<div class="card"><h2>Trận đấu 🌼</h2>
+<div class="status-box"><strong id="statusTitle">Đang chuẩn bị...</strong><div id="statusText">Tạo phòng và gửi mã cho bạn chơi nhé!</div></div>
+<button class="btn full" id="readyBtn">✅ Tôi đã sẵn sàng</button>
+<button class="btn blue full hidden" id="rematchBtn">🔄 Đấu lại nhé!</button>
+<div class="rules"><b>📖 Luật chơi:</b><br>① Mỗi người lần lượt đặt X hoặc O.<br>② Nối ít nhất 5 quân liên tiếp theo ngang, dọc hoặc chéo sẽ thắng.<br>③ Hai đầu bị chặn vẫn được tính trong phiên bản này.<br>④ Cả hai có thể chọn chơi lại; lượt đi trước đổi ở ván sau.</div>
+</div>
+</div>
+</section>
+<footer>Made for two ♡ • Không cần tải ứng dụng • Caro Club</footer>
+</main><div class="toast hidden" role="status" id="toast"></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const SIZE=15,CELLS=225;
+let auth=null,ws=null,state=null,manualClose=false,retryTimer=null,toastTimer=null;
+const show=(id,visible)=>$(id).classList.toggle('hidden',!visible);
+function toast(message){$('toast').textContent=message;show('toast',true);clearTimeout(toastTimer);toastTimer=setTimeout(()=>show('toast',false),3100)}
+async function post(path,data){const response=await fetch('/api/'+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(!response.ok)throw Error(result.detail||'Đã có lỗi kết nối');return result}
+function connect(){if(!auth)return;manualClose=false;
+const address=(location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws/'+encodeURIComponent(auth.code)+'?token='+encodeURIComponent(auth.token);
+const socket=new WebSocket(address);ws=socket;$('connection').textContent='🟡 Đang kết nối...';$('connection').classList.add('warn');
+socket.onopen=()=>{$('connection').textContent='🟢 Đã kết nối';$('connection').classList.remove('warn')};
+socket.onmessage=e=>{if(ws!==socket)return;let data;try{data=JSON.parse(e.data)}catch{return};if(data.type==='state')update(data);else if(data.type==='error')toast(data.message)};
+socket.onerror=()=>{if(ws===socket){$('connection').textContent='🟡 Mạng đang không ổn định';$('connection').classList.add('warn')}};
+socket.onclose=e=>{if(ws!==socket||manualClose||!auth)return;if(e.code===1008){toast('Phòng đã hết hạn. Hãy tạo phòng mới!');leave();return}$('connection').textContent='🟡 Đang kết nối lại...';$('connection').classList.add('warn');clearTimeout(retryTimer);retryTimer=setTimeout(()=>{if(auth)connect()},1800)};
+}
+function send(data){if(ws&&ws.readyState===WebSocket.OPEN)ws.send(JSON.stringify(data));else toast('Đang kết nối máy chủ, thử lại sau nhé!')}
+function restore(data){auth=data;state=null;sessionStorage.setItem('caro-club-session',JSON.stringify(data));show('welcome',false);show('game',true);$('roomCode').textContent=data.code;history.replaceState(null,'','/?room='+data.code);connect()}
+async function enter(mode){$('createBtn').disabled=true;$('joinBtn').disabled=true;try{const name=$('nameInput').value.trim()||'Người chơi';const r=await post(mode==='create'?'create':'join',mode==='create'?{name}:{name,code:$('roomInput').value.trim().toUpperCase()});restore(r)}catch(e){toast(e.message)}finally{$('createBtn').disabled=false;$('joinBtn').disabled=false}}
+function leave(){manualClose=true;clearTimeout(retryTimer);if(ws)ws.close();ws=null;auth=null;state=null;sessionStorage.removeItem('caro-club-session');show('welcome',true);show('game',false);history.replaceState(null,'','/');manualClose=false}
+function renderBoard(){let b=$('board');b.replaceChildren();let cur=state?.board||Array(CELLS).fill(0);
+const wins=new Set(state?.winLine||[]),last=state?.lastMove;
+for(let i=0;i<CELLS;i++){let cell=document.createElement('button');cell.type='button';cell.dataset.i=i;cell.className='cell'+(cur[i]===1?' x':cur[i]===2?' o':'')+(i===last?' last':'')+(wins.has(i)?' win':'');cell.textContent=cur[i]===1?'×':cur[i]===2?'○':'';cell.setAttribute('aria-label',String.fromCharCode(65+Math.floor(i/15))+(i%15+1)+(cur[i]?' đã đặt quân':' còn trống'));
+cell.disabled=!!cur[i]||!state||state.phase!=='playing'||state.turn!==state.side||!state.connected.every(Boolean);
+b.appendChild(cell)}}
+function update(next){if(!auth||next.code!==auth.code)return;let old=state;state=next;
+const me=next.side,other=1-me;
+$('roomCode').textContent=next.code;$('myName').textContent=next.names[me]||'Bạn';$('otherName').textContent=next.names[other]||'Đang đợi';
+$('scoreX').textContent=next.scores[0];$('scoreO').textContent=next.scores[1];$('roundLabel').textContent='Ván '+next.round;
+$('myInfo').textContent=(me===0?'Quân X':'Quân O')+' · '+(next.connected[me]?'Online':'Offline')+(next.phase==='lobby'?(next.ready[me]?' · Sẵn sàng':''):'');
+$('otherInfo').textContent=(other===0?'Quân X':'Quân O')+' · '+(!next.names[other]?'Chưa tham gia':next.connected[other]?'Online':'Offline')+(next.phase==='lobby'&&next.ready[other]?' · Sẵn sàng':'');
+show('readyBtn',next.phase==='lobby');show('rematchBtn',next.phase==='finished');
+$('readyBtn').disabled=next.ready[me]||!next.connected[me];$('readyBtn').textContent=next.ready[me]?'✅ Đã sẵn sàng':'✅ Tôi đã sẵn sàng';
+$('rematchBtn').disabled=next.rematch[me];$('rematchBtn').textContent=next.rematch[me]?'💗 Đang đợi đối thủ...':'🔄 Đấu lại nhé!';
+if(next.phase==='lobby'){if(!next.names[other]){headline('💌 Mời một người chơi!','Gửi link hoặc mã phòng cho bạn bè để vào chung bàn cờ.')}else if(next.ready[me]){headline('🌷 Đã sẵn sàng!','Đợi người kia nhấn Sẵn sàng để bắt đầu.')}else{headline('🎮 Chuẩn bị nào!','Hai người hãy nhấn Sẵn sàng để vào trận.')} }
+else if(next.phase==='finished'){if(next.draw){headline('🤝 Hòa rồi!','Hai bạn bất phân thắng bại. Bấm Đấu lại để chơi ván mới.')}else if(next.winner===me){headline('🏆 Bạn chiến thắng!','Tuyệt vời! Bạn đã nối đủ 5 quân liên tiếp. Rủ đối thủ đấu lại nhé.')}else{headline('💞 Suýt thắng rồi!','Đối thủ nối được 5 quân trước. Đấu lại để phục thù nào!')}}
+else if(!next.connected.every(Boolean)){headline('⏸️ Trận đấu tạm dừng','Đợi người chơi còn lại kết nối lại để tiếp tục.')}
+else if(next.turn===me){headline('✨ ĐẾN LƯỢT BẠN!','Hãy chạm vào ô trống để đặt quân '+(me===0?'X':'O')+'.');}
+else{headline('⏳ Lượt của đối thủ','Đối phương đang suy nghĩ. Hãy chuẩn bị nước đi tiếp theo!')}
+$('boardCaption').textContent=next.phase==='playing'?(next.turn===me?'👆 Đến lượt bạn — chạm ô trống để đặt quân':'💭 Đang chờ nước đi của đối thủ'):next.phase==='finished'?'✨ Các ô vàng là chuỗi 5 quân chiến thắng':'💌 Chờ đủ 2 người và bắt đầu ván đấu';
+if(old&&next.phase==='finished'&&old.phase!=='finished'){toast(next.draw?'🤝 Hai bạn hòa nhau!':next.winner===me?'🏆 Chúc mừng bạn thắng rồi!':'💗 Lần sau mình sẽ thắng!')}
+renderBoard()}
+function headline(title,message){$('statusTitle').textContent=title;$('statusText').textContent=message}
+$('board').addEventListener('click',e=>{let el=e.target.closest('button[data-i]');if(!el||!state||state.phase!=='playing'||state.turn!==state.side)return;send({type:'move',index:Number(el.dataset.i)})});
+$('createBtn').onclick=()=>enter('create');$('joinToggle').onclick=()=>show('joinPanel',true);$('joinBtn').onclick=()=>enter('join');
+$('readyBtn').onclick=()=>send({type:'ready'});$('rematchBtn').onclick=()=>send({type:'rematch'});$('leaveBtn').onclick=leave;
+$('shareBtn').onclick=async()=>{const url=location.origin+'/?room='+auth.code;try{if(navigator.share){await navigator.share({title:'Vào chơi Caro với mình nha 💗',text:'Mã phòng: '+auth.code,url});return}}catch(e){if(e.name==='AbortError')return}try{await navigator.clipboard.writeText(url);toast('Đã sao chép link mời! 💌')}catch{prompt('Sao chép link này',url)}};
+try{const old=JSON.parse(sessionStorage.getItem('caro-club-session')||'null');if(old&&old.code&&old.token)restore(old);else{const code=new URLSearchParams(location.search).get('room');if(code){$('roomInput').value=code.toUpperCase();show('joinPanel',true)}}}catch{sessionStorage.removeItem('caro-club-session')}
+renderBoard();
+</script></body></html>
