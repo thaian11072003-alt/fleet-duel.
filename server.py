@@ -28,6 +28,19 @@ def occupied(ships):
             if c in o: fail("Tàu bị chồng lên nhau")
             o[c]=n
     return o
+def sunk_ship_groups(ships, shots):
+    """Return only fully hit ships, grouped by their original placement."""
+    if not ships:
+        return []
+    fleet = occupied(ships)
+    fired = set(shots)
+    groups = []
+    for ship_id in range(len(ships)):
+        cells = sorted(cell for cell, number in fleet.items() if number == ship_id)
+        if cells and all(cell in fired for cell in cells):
+            groups.append(cells)
+    return groups
+
 class Name(BaseModel): name:str
 class Join(BaseModel):code:str;name:str
 class Secret(BaseModel):code:str;token:str
@@ -61,7 +74,10 @@ def state(a:Secret):
     fired=set(r["shots"][i]);oppshots=set(r["shots"][1-i])
     own=occupied(me["ships"]) if me["ships"] else {}
     targets=occupied(opp["ships"]) if opp and opp["ships"] else {}
-    return {"code":a.code.upper(),"you":i,"phase":r["phase"],"turn":r["turn"],"winner":r["winner"],"players":[{"name":p["name"],"ready":p["ready"]} if p else None for p in r["players"]],"ships":me["ships"],"yourHits":[c for c in oppshots if c in own],"yourMisses":[c for c in oppshots if c not in own],"hits":[c for c in fired if c in targets],"misses":[c for c in fired if c not in targets],"shotCount":len(fired),"enemyRemaining":sum(SIZES)-len([c for c in fired if c in targets])}
+    enemy_sunk = sunk_ship_groups(opp["ships"], fired) if opp and opp["ships"] else []
+    own_sunk = sunk_ship_groups(me["ships"], oppshots) if me["ships"] else []
+    # Enemy ship locations are secret until the game has completely ended.
+    return {"code":a.code.upper(),"you":i,"phase":r["phase"],"turn":r["turn"],"winner":r["winner"],"players":[{"name":p["name"],"ready":p["ready"]} if p else None for p in r["players"]],"ships":me["ships"],"yourHits":sorted(c for c in oppshots if c in own),"yourMisses":sorted(c for c in oppshots if c not in own),"yourSunkCells":[c for group in own_sunk for c in group],"hits":sorted(c for c in fired if c in targets),"misses":sorted(c for c in fired if c not in targets),"enemySunkCells":[c for group in enemy_sunk for c in group],"revealedEnemyCells":sorted(targets) if r["phase"]=="ended" else [],"shotCount":len(fired),"enemyRemaining":sum(SIZES)-len([c for c in fired if c in targets])}
 @app.post("/api/place")
 def place(a:Place):
     r=room(a.code.upper());i=player(r,a.token)
@@ -82,9 +98,18 @@ def fire(a:Fire):
     if type(a.cell)!=int or not 0<=a.cell<100:fail("Ô không hợp lệ")
     if a.cell in r["shots"][i]:fail("Ô này đã bắn")
     r["shots"][i].append(a.cell)
-    hit=a.cell in occupied(r["players"][1-i]["ships"])
-    if hit and len([c for c in r["shots"][i] if c in occupied(r["players"][1-i]["ships"])])==sum(SIZES):
-        r["winner"]=i;r["phase"]="ended"
-    elif not hit:r["turn"]=1-i
+    targets = occupied(r["players"][1-i]["ships"])
+    hit = a.cell in targets
+    sunk_ship = None
+    if hit:
+        group_id = targets[a.cell]
+        ship_cells = sorted(c for c, ship_id in targets.items() if ship_id == group_id)
+        if all(c in r["shots"][i] for c in ship_cells):
+            sunk_ship = {"size":len(ship_cells),"cells":ship_cells}
+        if all(c in r["shots"][i] for c in targets):
+            r["winner"]=i
+            r["phase"]="ended"
+    else:
+        r["turn"]=1-i
     r["updated"]=time.time()
-    return {"hit":hit,"won":r["winner"]==i}
+    return {"hit":hit,"won":r["winner"]==i,"sunkShip":sunk_ship}
